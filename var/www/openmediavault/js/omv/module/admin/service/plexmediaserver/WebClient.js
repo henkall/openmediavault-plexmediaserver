@@ -74,6 +74,6 @@ OMV.WorkspaceManager.registerPanel({
     id        : "webclient",
     path      : "/service/plexmediaserver",
     text      : _("Web Client"),
-    position  : 10,
+    position  : 20,
     className : "OMV.module.admin.service.plexmediaserver.WebClient"
 });
