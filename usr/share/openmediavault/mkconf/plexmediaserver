@@ -20,16 +20,18 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-# Enable/disable Plexpy
+# Enable/disable Tautulli
 if [ "$(omv_config_get "//services/plexmediaserver/pyenable")" = "1" ]; then
-    if [ ! -d /opt/plexpy ]; then
-        git clone https://github.com/JonnyWong16/plexpy.git /opt/plexpy
-        chmod +x /opt/plexpy/init-scripts/init.systemd
-        cp -f /opt/plexpy/init-scripts/init.systemd /lib/systemd/system/plexpy.service
+    if [ ! -d /opt/Tautulli ]; then
+        addgroup tautulli && sudo adduser --system --no-create-home tautulli --ingroup tautulli
+        git clone https://github.com/Tautulli/Tautulli.git /opt/Tautulli
+        chmod +x /opt/Tautulli/init-scripts/init.systemd
+        cp -f /opt/Tautulli/init-scripts/init.systemd /lib/systemd/system/tautulli.service
         systemctl daemon-reload
-        chown -R plex:nogroup /opt/plexpy
+        chown tautulli:tautulli -R /opt/Tautulli
     fi
 
+# The rest is work in progress ----->
     # Configure
     if [ "$(omv_config_get "//services/plexmediaserver/pyrun")" = "1" ]; then
         # Create defaults
@@ -39,20 +41,20 @@ if [ "$(omv_config_get "//services/plexmediaserver/pyenable")" = "1" ]; then
 # Run as username
 HP_USER=plex
 
-# Path to app HP_HOME=path_to_app_PlexPy.py
-HP_HOME=/opt/plexpy
+# Path to app HP_HOME=path_to_app_Tautulli.py
+HP_HOME=/opt/Tautulli
 
 # Data directory where plexpy.db, cache and logs are stored
-HP_DATA=/opt/plexpy
+HP_DATA=/opt/Tautulli
 
 # Path to store PID file
-HP_PIDFILE=/var/run/plexpy/plexpy.pid
+HP_PIDFILE=/var/run/Tautulli/Tautulli.pid
 
 # Path to python bin
 PYTHON_BIN=/usr/bin/python
 
 # Extra daemon option like: HP_OPTS=" --config=/opt/plexpy/config.ini"
-HP_OPTS=" --config=/opt/plexpy/config.ini"
+HP_OPTS=" --config=/opt/Tautulli/config.ini"
 
 # Extra start-stop-daemon option like START_OPTS=" --group=users"
 SSD_OPTS=
@@ -61,16 +63,16 @@ SSD_OPTS=
 HP_PORT="${HP_PORT} "
 
 EOF
-        systemctl enable plexpy.service || true
-        systemctl restart plexpy.service || true
+        systemctl enable tautulli.service || true
+        systemctl restart tautulli.service || true
     else
-        systemctl disable plexpy.service || true
-        systemctl stop plexpy.service || true
+        systemctl disable tautulli.service || true
+        systemctl stop tautulli.service || true
     fi
 else
     if [ -d /opt/plexpy ]; then
-        systemctl disable plexpy.service || true
-        systemctl stop plexpy.service || true
+        systemctl disable tautulli.service || true
+        systemctl stop tautulli.service || true
         rm -f /etc/default/plexpy
         rm -rf /opt/plexpy
         rm -f /lib/systemd/system/plexpy.service
