@@ -172,7 +172,7 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Settings", {
             }]
                 },{
             xtype    : "fieldset",
-            title    : "Plexpy addon",
+            title    : "Tautulli addon",
             name     : "plexpy",
             defaults : {
                 labelSeparator : ""
@@ -181,7 +181,7 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Settings", {
                 xtype      : "checkbox",
                 name       : "pyenable",
                 fieldLabel : _("Install"),
-                boxLabel   : _("Will install/uninstall Plexpy."),
+                boxLabel   : _("Will install/uninstall Tautulli."),
                 checked    : false
             }, {
                 xtype      : "checkbox",
