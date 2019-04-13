@@ -46,6 +46,7 @@ else
         rm -f /etc/default/tautulli
         rm -rf /opt/Tautulli
         rm -f /lib/systemd/system/tautulli.service
+        userdel -r tautulli
         systemctl daemon-reload
     fi
 fi
