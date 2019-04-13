@@ -75,18 +75,10 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Settings", {
 
         me.on('load', function () {
             var checked = me.findField('enable').checked;
-            var showtab = me.findField('showtab').checked;
             var parent = me.up('tabpanel');
 
             if (!parent)
                 return;
-
-            var webClientPanel = parent.down('panel[title=' + _("Web Client") + ']');
-
-            if (webClientPanel) {
-                checked ? webClientPanel.enable() : webClientPanel.disable();
-                showtab ? webClientPanel.tab.show() : webClientPanel.tab.hide();
-            }
         });
         me.callParent(arguments);
     },
@@ -163,12 +155,6 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Settings", {
                 fieldLabel : _("Database Folder"),
                 allowNone  : true,
                 readOnly   : true
-            },{
-                xtype      : "checkbox",
-                name       : "showtab",
-                fieldLabel : _("Enable"),
-                boxLabel   : _("Show tab containing Web Client frame."),
-                checked    : false
             }]
                 },{
             xtype    : "fieldset",
