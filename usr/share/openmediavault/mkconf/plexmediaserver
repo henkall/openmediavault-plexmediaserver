@@ -43,7 +43,6 @@ else
     if [ -d /opt/Tautulli ]; then
         systemctl disable tautulli.service || true
         systemctl stop tautulli.service || true
-        rm -f /etc/default/tautulli
         rm -rf /opt/Tautulli
         rm -f /lib/systemd/system/tautulli.service
         userdel -r tautulli
