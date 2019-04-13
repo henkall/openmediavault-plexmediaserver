@@ -31,15 +31,14 @@ if [ "$(omv_config_get "//services/plexmediaserver/pyenable")" = "1" ]; then
         chown tautulli:tautulli -R /opt/Tautulli
     fi
 
-# The rest is work in progress ----->
     # Configure
     if [ "$(omv_config_get "//services/plexmediaserver/pyrun")" = "1" ]; then
         # Create defaults
         HP_PORT="$(omv_config_get "//services/plexmediaserver/pyport")"
-        cat <<EOF > /etc/default/plexpy
+        cat <<EOF > /etc/default/tautulli
 ## The defaults
 # Run as username
-HP_USER=plex
+HP_USER=tautulli
 
 # Path to app HP_HOME=path_to_app_Tautulli.py
 HP_HOME=/opt/Tautulli
@@ -70,12 +69,12 @@ EOF
         systemctl stop tautulli.service || true
     fi
 else
-    if [ -d /opt/plexpy ]; then
+    if [ -d /opt/Tautulli ]; then
         systemctl disable tautulli.service || true
         systemctl stop tautulli.service || true
-        rm -f /etc/default/plexpy
-        rm -rf /opt/plexpy
-        rm -f /lib/systemd/system/plexpy.service
+        rm -f /etc/default/tautulli
+        rm -rf /opt/Tautulli
+        rm -f /lib/systemd/system/tautulli.service
         systemctl daemon-reload
     fi
 fi
