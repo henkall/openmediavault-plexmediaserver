@@ -23,45 +23,16 @@ set -e
 # Enable/disable Tautulli
 if [ "$(omv_config_get "//services/plexmediaserver/pyenable")" = "1" ]; then
     if [ ! -d /opt/Tautulli ]; then
-        addgroup tautulli && sudo adduser --system --no-create-home tautulli --ingroup tautulli
+        apt -y install python python-setuptools tzdata
         git clone https://github.com/Tautulli/Tautulli.git /opt/Tautulli
-        chmod +x /opt/Tautulli/init-scripts/init.systemd
-        cp -f /opt/Tautulli/init-scripts/init.systemd /lib/systemd/system/tautulli.service
-        systemctl daemon-reload
+        addgroup tautulli && sudo adduser --system --no-create-home tautulli --ingroup tautulli
+        cp /opt/Tautulli/init-scripts/init.systemd /lib/systemd/system/tautulli.service
         chown tautulli:tautulli -R /opt/Tautulli
+        systemctl daemon-reload
     fi
 
     # Configure
     if [ "$(omv_config_get "//services/plexmediaserver/pyrun")" = "1" ]; then
-        # Create defaults
-        HP_PORT="$(omv_config_get "//services/plexmediaserver/pyport")"
-        cat <<EOF > /etc/default/tautulli
-## The defaults
-# Run as username
-HP_USER=tautulli
-
-# Path to app HP_HOME=path_to_app_Tautulli.py
-HP_HOME=/opt/Tautulli
-
-# Data directory where plexpy.db, cache and logs are stored
-HP_DATA=/opt/Tautulli
-
-# Path to store PID file
-HP_PIDFILE=/var/run/Tautulli/Tautulli.pid
-
-# Path to python bin
-PYTHON_BIN=/usr/bin/python
-
-# Extra daemon option like: HP_OPTS=" --config=/opt/plexpy/config.ini"
-HP_OPTS=" --config=/opt/Tautulli/config.ini"
-
-# Extra start-stop-daemon option like START_OPTS=" --group=users"
-SSD_OPTS=
-
-# Hardcoded port to run on, overrides config.ini settings
-HP_PORT="${HP_PORT} "
-
-EOF
         systemctl enable tautulli.service || true
         systemctl restart tautulli.service || true
     else
