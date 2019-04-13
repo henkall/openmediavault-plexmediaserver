@@ -73,28 +73,16 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Information", {
                         '</li>' +
                         '</ul>' +
                         '<h3>Plex Pass</h3>' +
-                        'Plex Pass members can follow these instructions to get the most recent Debian version of Plex Media Server.' +
-                        '<ol>' +
-                        '<li>' +
-                        'Click on this link to go to the <a href="https://forums.plex.tv/" target="_blank">Plex forum</a>.  Then click on <b>Sign In</b> in the upper right.   Sign in with your <b>UserID</b> and <b>Password</b>.' +
-                        '</li>' +
-                        '<li>' +
-                        'Once signed in click on this <a href="https://forums.plex.tv/index.php/topic/48865-debian-package/" target="_blank">link</a>.  You are now in a Plex Pass only section of the forum.' +
-                        '</li>' +
-                        '<li>' +
-                        'The 1st post contains links to the latest Debian 32 bit and 64 bit package of Plex Media Server.  Download the appropriate package for your machine.' +
-                        '</li>' +
-                        '</ol>' 
+                        'Plex Pass members should just be able to install the Plex Pass release for debian on to the normal release.'
             }]
         }];
     }
-
 });
 
 OMV.WorkspaceManager.registerPanel({
     id        : "information",
     path      : "/service/plexmediaserver",
     text      : _("Setup Info"),
-    position  : 30,
+    position  : 20,
     className : "OMV.module.admin.service.plexmediaserver.Information"
 });
