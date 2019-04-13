@@ -179,7 +179,17 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Settings", {
                 xtype      : "checkbox",
                 name       : "pyrun",
                 fieldLabel : _("Run"),
+                boxLabel   : _("Start and stop Tautulli"),
                 checked    : false
+            }, {
+            xtype  : "fieldset",
+            title  : _("Information"),
+            layout : "fit",
+            items  : [{
+                border  : false,
+                html    :
+                        'Tautulli is running on port 8181 as default and can be change at tautullis settings page'
+               }]            
             }]
         }];
     },
