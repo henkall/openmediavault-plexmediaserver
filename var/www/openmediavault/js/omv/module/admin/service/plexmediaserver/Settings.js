@@ -155,12 +155,6 @@ Ext.define("OMV.module.admin.service.plexmediaserver.Settings", {
                 fieldLabel : _("Database Folder"),
                 allowNone  : true,
                 readOnly   : true
-            },{
-                xtype      : "checkbox",
-                name       : "showtab",
-                fieldLabel : _("Enable"),
-                boxLabel   : _("Show tab containing Web Client frame."),
-                checked    : false
             }]
                 },{
             xtype    : "fieldset",
