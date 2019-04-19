@@ -15,7 +15,9 @@ Depends: openmediavault (>= 3.0.21),
          avahi-utils,
          avahi-daemon,
          git-core,
-         python
+         python,
+         python-setuptools,
+         tzdata
 Description: OpenMediaVault Plex Media Server plugin
  Stream media everywhere(tm)
  .
