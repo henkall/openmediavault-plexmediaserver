@@ -40,12 +40,11 @@ case "$1" in
 		rm -rf /etc/systemd/system/plexmediaserver.service.d >/dev/null 2>&1
 	fi
 	
-        if [ -d /opt/plexpy ]; then
-            deb-systemd-helper disable plexpy >/dev/null || true
-            deb-systemd-invoke stop plexpy >/dev/null || true
-			rm -f /etc/default/plexpy >/dev/null 2>&1
-			rm -Rf /opt/plexpy >/dev/null 2>&1
-			rm -f /etc/init.d/plexpy >/dev/null 2>&1
+        if [ -d /opt/Tautulli ]; then
+            deb-systemd-helper disable tautulli >/dev/null || true
+            deb-systemd-invoke stop tautulli >/dev/null || true
+			rm -Rf /opt/Tautulli >/dev/null 2>&1
+			rm -f /lib/systemd/system/tautulli.service >/dev/null 2>&1
 		fi
 	;;
 
