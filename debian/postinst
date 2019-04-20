@@ -43,21 +43,17 @@ case "$1" in
         if omv_config_exists "${SERVICE_XPATH}"; then
             ENABLE="$(omv_config_get "${SERVICE_XPATH}/enable")"
             MNTENTREF="$(omv_config_get "${SERVICE_XPATH}/mntentref")"
-            SHOWTAB="$(omv_config_get "${SERVICE_XPATH}/showtab")"
         else
             ENABLE="0"
             MNTENTREF=""
-            SHOWTAB="0"
         fi
 
         if omv_config_exists "${SERVICE_XPATH}/pyport"; then
             PYENABLE="$(omv_config_get "${SERVICE_XPATH}/pyenable")"
             PYRUN="$(omv_config_get "${SERVICE_XPATH}/pyrun")"
-            PYPORT="$(omv_config_get "${SERVICE_XPATH}/pyport")"
         else
             PYENABLE="0"
             PYRUN="0"
-            PYPORT="8182"
         fi
 
         omv_config_delete "${SERVICE_XPATH}"
@@ -67,10 +63,8 @@ case "$1" in
         omv_config_add_key "${SERVICE_XPATH}" "enable" "${ENABLE}"
         omv_config_add_key "${SERVICE_XPATH}" "db-folder" "${PLEX_HOME}"
         omv_config_add_key "${SERVICE_XPATH}" "mntentref" "${MNTENTREF}"
-        omv_config_add_key "${SERVICE_XPATH}" "showtab" "${SHOWTAB}"
         omv_config_add_key "${SERVICE_XPATH}" "pyenable" "${PYENABLE}"
         omv_config_add_key "${SERVICE_XPATH}" "pyrun" "${PYRUN}"
-        omv_config_add_key "${SERVICE_XPATH}" "pyport" "${PYPORT}"
 
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
